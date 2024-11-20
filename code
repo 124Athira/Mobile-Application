@@ -1,0 +1,2745 @@
+PROGRAM 1:
+Design a Login Form with username and password using LinearLayout and toast valid credentials.
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android" >
+<EditText
+android:id="@+id/uname1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Username" />
+<EditText
+android:id="@+id/pass1"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Password"
+android:inputType="textPassword"
+android:minHeight="48dp" />
+<Button
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Login"
+android:onClick="Login"/>
+</LinearLayout>
+
+
+
+
+MainActivity.java:
+package com.example.firstprogram;
+import android.os.Bundle;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.view.View;
+public class MainActivity extends AppCompatActivity {
+private EditText unameEditText;
+private EditText passEditText;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+
+EdgeToEdge.enable(this);
+setContentView(R.layout.activity_main);
+unameEditText = findViewById(R.id.uname1);
+passEditText = findViewById(R.id.pass1);
+}
+public void Login(View view) {
+String username = unameEditText.getText().toString();
+String password = passEditText.getText().toString();
+if (isValidCredentials(username,password))
+{
+Toast.makeText(this,"login Successful",Toast.LENGTH_SHORT).show();
+}
+else
+{
+Toast.makeText(this,"invalid credentials",Toast.LENGTH_SHORT).show();
+}
+}
+private boolean isValidCredentials(String username,String password)
+{
+return username.equals("Admin") && password.equals("1234");
+}
+}
+The provided code implements a simple Android application with a basic login functionality. Here's a detailed explanation:
+________________________________________
+XML Layout: activity_main.xml
+The layout file defines the user interface (UI) components for the main activity.
+1.	Root Element (LinearLayout):
+o	LinearLayout: Arranges child elements vertically (android:orientation="vertical") from top to bottom.
+o	android:layout_height and android:layout_width: Set to match_parent so it fills the screen.
+o	xmlns:android: Declares the XML namespace for Android attributes.
+2.	Child Components:
+o	EditText for Username:
+	android:id="@+id/uname1": Unique identifier for the username input field.
+	android:layout_width and android:layout_height: Specifies the size of the input field.
+	android:hint: Placeholder text prompting the user to enter their username.
+o	EditText for Password:
+	android:id="@+id/pass1": Unique identifier for the password input field.
+	android:hint: Placeholder text prompting the user to enter their password.
+	android:inputType="textPassword": Masks the input for security, showing dots or asterisks instead of plain text.
+	android:minHeight: Ensures a minimum height of 48dp for better touch experience.
+o	Button for Login:
+	android:layout_width and android:layout_height: Sets the button to fill the width of the screen and adapt height to content.
+	android:text: Displays the label "Login" on the button.
+	android:onClick="Login": Links the button's click action to the Login method in the MainActivity class.
+________________________________________
+Java Code: MainActivity.java
+1. Package Declaration:
+package com.example.firstprogram;
+Defines the package location of the MainActivity class.
+2. Imports:
+•	android.os.Bundle: Handles activity lifecycle events like onCreate.
+•	androidx.appcompat.app.AppCompatActivity: Ensures backward compatibility for modern features.
+•	android.widget.EditText: Represents text input fields.
+•	android.widget.Toast: Displays short messages on the screen.
+•	android.view.View: Represents UI views and is required for the Login method.
+3. Class Declaration:
+public class MainActivity extends AppCompatActivity {
+Defines the MainActivity class that extends AppCompatActivity, making it the main screen of the app.
+4. Member Variables:
+private EditText unameEditText;
+private EditText passEditText;
+Declare two EditText variables to reference the username and password fields.
+5. onCreate Method:
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    EdgeToEdge.enable(this);
+    setContentView(R.layout.activity_main);
+    unameEditText = findViewById(R.id.uname1);
+    passEditText = findViewById(R.id.pass1);
+}
+•	onCreate: Called when the activity is first created.
+•	EdgeToEdge.enable(this): Enables edge-to-edge display (modern UI improvement for newer devices).
+•	setContentView: Links the Java code to the activity_main.xml layout file.
+•	findViewById: Associates the EditText variables with the corresponding XML components using their IDs.
+
+6. Login Method:
+public void Login(View view) {
+    String username = unameEditText.getText().toString();
+    String password = passEditText.getText().toString();
+    if (isValidCredentials(username, password)) {
+        Toast.makeText(this, "login Successful", Toast.LENGTH_SHORT).show();
+    } else {
+        Toast.makeText(this, "invalid credentials", Toast.LENGTH_SHORT).show();
+    }
+}
+•	Parameters: The view parameter represents the button triggering the method.
+•	getText().toString(): Retrieves the text entered in the username and password fields.
+•	isValidCredentials: Checks the validity of entered credentials.
+•	Toast: Displays a short message. If valid, "login Successful" is shown; otherwise, "invalid credentials."
+7. isValidCredentials Method:
+private boolean isValidCredentials(String username, String password) {
+    return username.equals("Admin") && password.equals("1234");
+}
+•	Checks if the entered username and password match the hardcoded credentials (Admin and 1234).
+•	Returns true if they match; otherwise, false.
+________________________________________
+Execution Flow:
+1.	The user opens the app, and the UI from activity_main.xml is displayed.
+2.	The user enters a username and password, then taps the "Login" button.
+3.	The Login method is invoked, retrieving and validating the input.
+4.	Depending on the validation result:
+o	If valid, a toast message displays "login Successful."
+o	If invalid, a toast message displays "invalid credentials."
+
+
+
+
+
+PROGRAM 2:
+Write a program that demonstrates Activity Lifecycle.
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+</FrameLayout>
+
+MainActivity.java
+package com.example.activityapplication;
+import android.os.Bundle;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+EdgeToEdge.enable(this);
+setContentView(R.layout.activity_main);
+ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+return insets;
+});
+Toast toast1 = Toast.makeText(getApplicationContext(), "onCreate Called",
+Toast.LENGTH_LONG);
+toast1.show();;
+}
+protected void onStart() {
+super.onStart();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onStart Called",
+Toast.LENGTH_LONG);
+toast1.show();
+}
+@Override
+protected void onRestart() {
+super.onRestart();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onRestart Called",
+Toast.LENGTH_LONG);
+toast1.show();
+}
+protected void onPause() {
+super.onPause();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onPause Called",
+Toast.LENGTH_LONG);
+
+toast1.show();
+}
+protected void onResume() {
+super.onResume();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onResume Called",
+Toast.LENGTH_LONG);
+toast1.show();
+}
+protected void onStop() {
+super.onStop();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onStop Called",
+Toast.LENGTH_LONG);
+toast1.show();
+}
+protected void onDestroy() {
+super.onDestroy();
+Toast toast1 = Toast.makeText(getApplicationContext(), "onDestroy Called",
+Toast.LENGTH_LONG);
+toast1.show();
+}
+}
+The provided program demonstrates the Activity Lifecycle in an Android application by utilizing the lifecycle methods of an Activity and displaying Toast messages for each method. Let’s analyze and explain the code step by step.
+Explanation of the Layout:
+•	Root Element (FrameLayout):
+o	xmlns:android: Defines the XML namespace for Android.
+o	android:id="@+id/main": Assigns an ID to the root layout to reference it programmatically in Java code.
+o	android:layout_width and android:layout_height: Set to match_parent to cover the entire screen.
+o	android:background: Sets the background color to white.
+This layout is minimal because the purpose of this program is to demonstrate lifecycle methods, not UI components.
+________________________________________
+Java Code: MainActivity.java
+Lifecycle Methods Overview:
+In Android, an Activity goes through several lifecycle states managed by specific methods. The program implements these methods and logs their calls using Toast messages.
+________________________________________
+Key Lifecycle Methods Used:
+1.	onCreate()
+o	Called when the activity is first created.
+o	Initializes the activity and sets up the user interface.
+o	Here:
+	The UI (activity_main.xml) is loaded using setContentView.
+	A Toast message displays "onCreate Called".
+2.	onStart()
+o	Called when the activity becomes visible to the user.
+o	Indicates that the activity is about to enter the foreground.
+o	Here:
+	A Toast message displays "onStart Called".
+3.	onResume()
+o	Called when the activity starts interacting with the user.
+o	Indicates the activity is now active and running.
+o	Here:
+	A Toast message displays "onResume Called".
+4.	onPause()
+o	Called when the activity loses focus but is still visible (e.g., another activity partially covers it).
+o	Used to pause ongoing tasks (e.g., animations, sensors).
+o	Here:
+	A Toast message displays "onPause Called".
+5.	onStop()
+o	Called when the activity is no longer visible (e.g., the user navigates to another activity).
+o	Indicates that the activity is in the background.
+o	Here:
+	A Toast message displays "onStop Called".
+6.	onRestart()
+o	Called when the activity transitions from stopped to started.
+o	Happens if the activity is brought back to the foreground.
+o	Here:
+	A Toast message displays "onRestart Called".
+7.	onDestroy()
+o	Called when the activity is being destroyed.
+o	Used for cleanup and releasing resources.
+o	Here:
+	A Toast message displays "onDestroy Called".
+________________________________________
+Additional Features:
+1.	Edge-to-Edge Support:
+EdgeToEdge.enable(this);
+o	Ensures the UI adapts to devices with edge-to-edge displays (removes navigation bars/paddings).
+2.	Window Insets Handling:
+ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+    return insets;
+});
+o	Adjusts the layout to account for system bars like the status bar or navigation bar.
+________________________________________
+
+Execution Flow:
+When the application is launched or interacted with, the following events occur:
+1.	Launch Application:
+o	onCreate(): Called when the app starts.
+o	onStart(): Activity becomes visible.
+o	onResume(): Activity starts interacting with the user.
+2.	Move App to Background (e.g., press Home):
+o	onPause(): Activity loses focus.
+o	onStop(): Activity becomes invisible.
+3.	Reopen the App:
+o	onRestart(): Activity is being restarted.
+o	onStart(): Activity becomes visible again.
+o	onResume(): Activity starts interacting again.
+4.	Close the App (e.g., back button):
+o	onPause(): Activity loses focus.
+o	onStop(): Activity becomes invisible.
+o	onDestroy(): Activity is destroyed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 3:
+Implementing basic arithmetic operations of a simple calculator
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical">
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal">
+<EditText
+android:id="@+id/ed1"
+android:layout_width="160dp"
+android:layout_height="wrap_content"
+android:hint="Num 1"/>
+<EditText
+android:id="@+id/ed2"
+android:layout_width="160dp"
+android:layout_height="wrap_content"
+android:hint="Num 2"/>
+</LinearLayout>
+<Button
+android:layout_height="wrap_content"
+android:layout_width="120dp"
+android:text="Add"
+android:onClick="Add"/>
+<Button
+android:layout_height="wrap_content"
+android:layout_width="120dp"
+android:text="Sub"
+android:onClick="Sub"/>
+<Button
+android:layout_height="wrap_content"
+android:layout_width="120dp"
+android:text="Mul"
+android:onClick="Mul"/>
+<Button
+android:layout_height="wrap_content"
+android:layout_width="120dp"
+android:text="Div"
+android:onClick="Div"/>
+<Button
+android:id="@+id/clearButton"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+
+android:layout_gravity="center"
+android:text="Clear"
+android:onClick="Clear"/>
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="horizontal" >
+<TextView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Result:"
+android:textSize="20sp"/>
+<TextView
+android:id="@+id/tv1"
+android:layout_width="160dp"
+android:layout_height="30dp" />
+</LinearLayout>
+</LinearLayout>
+
+MainActivity.java
+package com.example.thirdprogram;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+EditText ed1,ed2;
+TextView tv1;
+double num1,num2;
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+ed1 = findViewById(R.id.ed1);
+ed2 = findViewById(R.id.ed2);
+tv1= findViewById(R.id.tv1);
+}
+public void Clear(View view) {
+ed1.setText("");
+ed2.setText("");
+tv1.setText("");
+}
+public void Add(View view) {
+String num1str = ed1.getText().toString();
+String num2str = ed2.getText().toString();
+if (!num1str.isEmpty() && !num2str.isEmpty()) {
+double num1 = Double.parseDouble(num1str);
+double num2 = Double.parseDouble(num2str);
+double result = num1 + num2;
+tv1.setText(String.valueOf(result));
+}
+
+else
+{
+tv1.setText("Result: Invalid input");
+}
+}
+public void Sub(View view) {
+String num1str = ed1.getText().toString();
+String num2str = ed2.getText().toString();
+if (!num1str.isEmpty() && !num2str.isEmpty()) {
+double num1 = Double.parseDouble(num1str);
+double num2 = Double.parseDouble(num2str);
+double result = num1 - num2;
+tv1.setText(String.valueOf(result));
+}
+else
+{
+tv1.setText("Result: Invalid input");
+}
+}
+public void Mul(View view) {
+String num1str = ed1.getText().toString();
+String num2str = ed2.getText().toString();
+if (!num1str.isEmpty() && !num2str.isEmpty())
+{
+double num1 = Double.parseDouble(num1str);
+double num2 = Double.parseDouble(num2str);
+double result = num1 * num2;
+tv1.setText(String.valueOf(result));
+}
+else
+{
+tv1.setText("Result: Invalid input");
+}
+}
+public void Div(View view) {
+String num1str = ed1.getText().toString();
+String num2str = ed2.getText().toString();
+if (!num1str.isEmpty() && !num2str.isEmpty())
+{
+double num1 = Double.parseDouble(num1str);
+double num2 = Double.parseDouble(num2str); if (num2 != 0) {
+double result = num1 / num2;
+tv1.setText(String.valueOf(result));
+}
+else
+{
+tv1.setText("Result: Division by zero");}
+}
+else
+{
+tv1.setText("Result: Invalid input");
+}
+}}
+
+
+This program implements a basic calculator with operations: addition, subtraction, multiplication, and division. It demonstrates simple arithmetic operations in an Android application using two inputs and a result display.
+________________________________________
+Layout: activity_main.xml
+Code Breakdown:
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+•	LinearLayout: The root layout arranges child elements vertically.
+•	xmlns:android: XML namespace required for Android attributes.
+________________________________________
+Input Fields:
+<EditText
+    android:id="@+id/ed1"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:hint="Num 1"/>
+<EditText
+    android:id="@+id/ed2"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:hint="Num 2"/>
+•	EditText: Input fields for the two numbers.
+•	android:id: Assigns unique IDs to reference these fields in Java.
+•	android:hint: Provides a placeholder text.
+________________________________________
+Buttons:
+<Button
+    android:layout_height="wrap_content"
+    android:layout_width="120dp"
+    android:text="Add"
+    android:onClick="Add"/>
+•	Button: Performs an arithmetic operation.
+•	android:text: Sets the button label.
+•	android:onClick: Associates the button with a method in MainActivity.java.
+This is repeated for Subtraction, Multiplication, Division, and Clear buttons.
+________________________________________
+Result Display:
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Result:"
+    android:textSize="20sp"/>
+<TextView
+    android:id="@+id/tv1"
+    android:layout_width="160dp"
+    android:layout_height="30dp" />
+•	TextView: Displays the result of the operation.
+•	android:id: The result TextView is identified by tv1.
+________________________________________
+Code: MainActivity.java
+Imports:
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+•	Required imports for activity, view handling, and widget manipulation.
+________________________________________
+Class and Variable Initialization:
+public class MainActivity extends AppCompatActivity {
+    EditText ed1, ed2;
+    TextView tv1;
+•	EditText and TextView References:
+o	ed1 and ed2: Input fields.
+o	tv1: Displays the calculation result.
+________________________________________
+onCreate Method:
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ed1 = findViewById(R.id.ed1);
+    ed2 = findViewById(R.id.ed2);
+    tv1 = findViewById(R.id.tv1);
+}
+•	Purpose: Sets up the UI and connects layout elements to Java references.
+•	setContentView: Loads activity_main.xml.
+•	findViewById: Binds EditText and TextView components.
+________________________________________
+Arithmetic Operations:
+Each method performs a specific operation and updates the TextView.
+1.	Addition:
+public void Add(View view) {
+    String num1str = ed1.getText().toString();
+    String num2str = ed2.getText().toString();
+    if (!num1str.isEmpty() && !num2str.isEmpty()) {
+        double num1 = Double.parseDouble(num1str);
+        double num2 = Double.parseDouble(num2str);
+        double result = num1 + num2;
+        tv1.setText(String.valueOf(result));
+    } else {
+        tv1.setText("Result: Invalid input");
+    }
+}
+•	Reads numbers as String from EditText (ed1 and ed2).
+•	Converts them to double using Double.parseDouble.
+•	Adds the two numbers and sets the result to tv1.
+•	Validates inputs to avoid crashes with empty fields.
+2.	Subtraction:
+public void Sub(View view) {
+    String num1str = ed1.getText().toString();
+    String num2str = ed2.getText().toString();
+    if (!num1str.isEmpty() && !num2str.isEmpty()) {
+        double num1 = Double.parseDouble(num1str);
+        double num2 = Double.parseDouble(num2str);
+        double result = num1 - num2;
+        tv1.setText(String.valueOf(result));
+    } else {
+        tv1.setText("Result: Invalid input");
+    }
+}
+•	Similar logic as Add, but performs subtraction.
+3.	Multiplication:
+public void Mul(View view) {
+    String num1str = ed1.getText().toString();
+    String num2str = ed2.getText().toString();
+    if (!num1str.isEmpty() && !num2str.isEmpty()) {
+        double num1 = Double.parseDouble(num1str);
+        double num2 = Double.parseDouble(num2str);
+        double result = num1 * num2;
+        tv1.setText(String.valueOf(result));
+    } else {
+        tv1.setText("Result: Invalid input");
+    }
+}
+•	Similar logic as Add, but performs multiplication.
+4.	Division:
+public void Div(View view) {
+    String num1str = ed1.getText().toString();
+    String num2str = ed2.getText().toString();
+    if (!num1str.isEmpty() && !num2str.isEmpty()) {
+        double num1 = Double.parseDouble(num1str);
+        double num2 = Double.parseDouble(num2str);
+        if (num2 != 0) {
+            double result = num1 / num2;
+            tv1.setText(String.valueOf(result));
+        } else {
+            tv1.setText("Result: Division by zero");
+        }
+    } else {
+        tv1.setText("Result: Invalid input");
+    }
+}
+•	Validates for division by zero and handles it with an appropriate message.
+________________________________________
+Clear Operation:
+public void Clear(View view) {
+    ed1.setText("");
+    ed2.setText("");
+    tv1.setText("");
+}
+•	Resets both input fields (ed1 and ed2) and the result (tv1).
+________________________________________
+Execution Flow:
+1.	User enters two numbers in the input fields.
+2.	On clicking an operation button, the respective method is invoked:
+o	Input validation is performed.
+o	The result is calculated and displayed in tv1.
+3.	The "Clear" button resets all fields.
+
+
+PROGRAM 4:
+Implement validations on various UI controls
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+<EditText
+android:id="@+id/editTextEmail"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Email"
+android:inputType="textEmailAddress"
+android:minHeight="48dp" />
+<EditText
+android:id="@+id/editTextPassword"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Password"
+android:inputType="textPassword"
+android:minHeight="48dp" />
+<Button
+android:id="@+id/buttonSubmit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Submit" />
+<TextView
+android:id="@+id/textViewError"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textColor="@color/my_red"
+android:textSize="16sp" />
+</LinearLayout>
+
+MainActivity.java
+package com.example.fourthprogram;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+private EditText emailEditText;
+private EditText passwordEditText;
+private Button submitButton;
+private TextView errorTextView;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+emailEditText = findViewById(R.id.editTextEmail);
+passwordEditText = findViewById(R.id.editTextPassword);
+submitButton = findViewById(R.id.buttonSubmit);
+errorTextView = findViewById(R.id.textViewError);
+submitButton.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+validateInputs();
+}
+});
+}
+private void validateInputs() {
+String email = emailEditText.getText().toString().trim();
+String password = passwordEditText.getText().toString().trim();
+// Reset error message
+errorTextView.setText("");
+if (TextUtils.isEmpty(email)) {
+errorTextView.setText("Email cannot be empty");
+return;
+}
+if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+errorTextView.setText("Invalid email address");
+return;
+}
+if (TextUtils.isEmpty(password)) {
+errorTextView.setText("Password cannot be empty");
+return;
+}
+if (password.length() < 6) {
+errorTextView.setText("Password must be at least 6 characters");
+return;
+}
+
+Toast.makeText(MainActivity.this, "Validation Successful", Toast.LENGTH_SHORT).show();
+}
+}
+
+colors.xml
+<resources>
+<color name="my_red">#FF0000</color>
+</resources>
+
+This program demonstrates how to implement input validations on UI controls in an Android application. The layout includes email and password fields with validation logic to check for empty fields, valid email format, and password length.
+________________________________________
+Layout: activity_main.xml
+Code Breakdown:
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+•	LinearLayout: A vertical layout arranges elements in a single column.
+•	xmlns:android: Required namespace for Android XML attributes.
+•	android:padding="16dp": Adds padding to the layout for spacing.
+________________________________________
+UI Components:
+1.	Email Input Field:
+<EditText
+    android:id="@+id/editTextEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Email"
+    android:inputType="textEmailAddress"
+    android:minHeight="48dp" />
+•	EditText: Input field for email.
+o	android:hint: Displays a placeholder text ("Email").
+o	android:inputType="textEmailAddress": Restricts input to email format.
+2.	Password Input Field:
+<EditText
+    android:id="@+id/editTextPassword"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Password"
+    android:inputType="textPassword"
+    android:minHeight="48dp" />
+•	EditText: Input field for password.
+o	android:hint: Displays "Password."
+o	android:inputType="textPassword": Masks input for privacy.
+3.	Submit Button:
+<Button
+    android:id="@+id/buttonSubmit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Submit" />
+•	Button: Trigger for validation logic.
+4.	Error Message Display:
+<TextView
+    android:id="@+id/textViewError"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/my_red"
+    android:textSize="16sp" />
+•	TextView: Displays error messages.
+o	android:textColor: Uses a custom red color (#FF0000) defined in colors.xml.
+________________________________________
+Code: MainActivity.java
+Imports:
+import android.text.TextUtils;
+import android.util.Patterns;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+•	TextUtils: For checking empty fields.
+•	Patterns: Provides a predefined regex pattern for validating email addresses.
+________________________________________
+Initialization:
+private EditText emailEditText;
+private EditText passwordEditText;
+private Button submitButton;
+private TextView errorTextView;
+•	Variables to reference UI components (EditText, Button, and TextView).
+________________________________________
+onCreate Method:
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    emailEditText = findViewById(R.id.editTextEmail);
+    passwordEditText = findViewById(R.id.editTextPassword);
+    submitButton = findViewById(R.id.buttonSubmit);
+    errorTextView = findViewById(R.id.textViewError);
+
+    submitButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            validateInputs();
+        }
+    });
+}
+•	setContentView: Links the XML layout file to the activity.
+•	findViewById: Connects UI elements to their respective variables.
+•	setOnClickListener:
+o	Attaches a click listener to the Submit button.
+o	Calls validateInputs() when clicked.
+________________________________________
+Validation Logic:
+private void validateInputs() {
+    String email = emailEditText.getText().toString().trim();
+    String password = passwordEditText.getText().toString().trim();
+
+    // Reset error message
+    errorTextView.setText("");
+•	Input Retrieval:
+o	Reads text from the EditText fields and trims leading/trailing whitespace.
+•	Reset Error:
+o	Clears any existing error message.
+________________________________________
+Validation Steps:
+1.	Check for Empty Email Field:
+if (TextUtils.isEmpty(email)) {
+    errorTextView.setText("Email cannot be empty");
+    return;
+}
+•	TextUtils.isEmpty: Checks if the email field is empty.
+•	Displays an error message if empty.
+________________________________________
+2.	Validate Email Format:
+if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+    errorTextView.setText("Invalid email address");
+    return;
+}
+•	Patterns.EMAIL_ADDRESS.matcher(email).matches(): Checks if the email matches a valid format.
+________________________________________
+3.	Check for Empty Password Field:
+if (TextUtils.isEmpty(password)) {
+    errorTextView.setText("Password cannot be empty");
+    return;
+}
+•	Ensures the password field is not empty.
+________________________________________
+4.	Validate Password Length:
+if (password.length() < 6) {
+    errorTextView.setText("Password must be at least 6 characters");
+    return;
+}
+•	Ensures the password is at least 6 characters long.
+________________________________________
+5.	Validation Success:
+Toast.makeText(MainActivity.this, "Validation Successful", Toast.LENGTH_SHORT).show();
+•	If all validations pass, a success message is displayed using a Toast.
+________________________________________
+colors.xml
+<resources>
+    <color name="my_red">#FF0000</color>
+</resources>
+•	Defines a custom red color for displaying error messages.
+________________________________________
+Execution Flow:
+1.	User enters email and password.
+2.	Clicks the Submit button.
+3.	validateInputs() performs:
+o	Empty field checks for email and password.
+o	Email format validation.
+o	Password length check.
+4.	Displays error messages in the TextView or a success Toast if inputs are valid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 5:
+Design a registration activity and store registration details in local memory of phone using Intents and SharedPreferences
+CODE:
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+<EditText
+android:id="@+id/editTextName"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Enter your name"
+android:minHeight="48dp" />
+<EditText
+android:id="@+id/editTextEmail"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Enter your email"
+android:inputType="textEmailAddress"
+android:minHeight="48dp" />
+<Button
+android:id="@+id/buttonRegister"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="Register" />
+</LinearLayout>
+
+MainActivity.java
+package com.example.recordfifth;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+private EditText editTextName, editTextEmail;
+private Button buttonRegister;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+editTextName = findViewById(R.id.editTextName);
+editTextEmail = findViewById(R.id.editTextEmail);
+buttonRegister = findViewById(R.id.buttonRegister);
+buttonRegister.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+registerUser();
+}
+});
+}
+private void registerUser() {
+String name = editTextName.getText().toString().trim();
+String email = editTextEmail.getText().toString().trim();
+if (name.isEmpty() || email.isEmpty()) {
+Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+return;
+}
+// Store registration details in SharedPreferences
+SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+SharedPreferences.Editor editor = sharedPreferences.edit();
+editor.putString("userName", name);
+editor.putString("userEmail", email);
+editor.apply();
+// Navigate to another activity
+Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+startActivity(intent);
+finish(); // Finish this activity
+}
+}
+
+activity_welcome.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+<TextView
+android:id="@+id/textViewWelcome"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:textSize="18sp" />
+</LinearLayout>
+
+WelcomeActivity.java
+package com.example.recordfifth;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+public class WelcomeActivity extends AppCompatActivity {
+private TextView textViewWelcome;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_welcome);
+textViewWelcome = findViewById(R.id.textViewWelcome);
+// Retrieve registration details from SharedPreferences
+SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+String userName = sharedPreferences.getString("userName", "User");
+String userEmail = sharedPreferences.getString("userEmail", "No email");
+textViewWelcome.setText("Welcome, " + userName + "!\nYour email: " + userEmail);
+}
+}
+This program demonstrates how to design a registration activity in Android that collects a user's name and email, saves the data locally using SharedPreferences, and displays the data in another activity using Intents. Below is a detailed explanation of the code.
+________________________________________
+1. Layouts
+activity_main.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+•	LinearLayout: Organizes UI elements vertically.
+UI Components:
+1.	Name Input Field:
+<EditText
+    android:id="@+id/editTextName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter your name"
+    android:minHeight="48dp" />
+•	EditText: Input field for entering the user's name.
+o	android:hint: Displays a placeholder text.
+2.	Email Input Field:
+<EditText
+    android:id="@+id/editTextEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Enter your email"
+    android:inputType="textEmailAddress"
+    android:minHeight="48dp" />
+•	EditText: Input field for email.
+o	android:inputType="textEmailAddress": Ensures email input is formatted correctly.
+3.	Register Button:
+<Button
+    android:id="@+id/buttonRegister"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Register" />
+•	Button: Submits the registration details.
+________________________________________
+activity_welcome.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+<TextView
+    android:id="@+id/textViewWelcome"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="18sp" />
+</LinearLayout>
+•	TextView: Displays a welcome message using stored user details.
+________________________________________
+2. Main Activity: Registration (MainActivity.java)
+Code Explanation:
+1.	Initialization:
+private EditText editTextName, editTextEmail;
+private Button buttonRegister;
+•	Declare UI variables for EditText (name, email) and the Register button.
+2.	Setting Up UI in onCreate:
+editTextName = findViewById(R.id.editTextName);
+editTextEmail = findViewById(R.id.editTextEmail);
+buttonRegister = findViewById(R.id.buttonRegister);
+
+buttonRegister.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        registerUser();
+    }
+});
+•	findViewById: Binds UI components to variables.
+•	setOnClickListener: Attaches a click listener to the button to call the registerUser method.
+________________________________________
+3.	registerUser Method:
+private void registerUser() {
+    String name = editTextName.getText().toString().trim();
+    String email = editTextEmail.getText().toString().trim();
+
+    if (name.isEmpty() || email.isEmpty()) {
+        Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        return;
+    }
+•	Input Retrieval:
+o	Retrieves user input from EditText fields.
+o	Trims whitespace using trim().
+•	Validation:
+o	Checks if any field is empty.
+o	Displays a toast message if validation fails.
+________________________________________
+4.	Storing Data in SharedPreferences:
+SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+SharedPreferences.Editor editor = sharedPreferences.edit();
+editor.putString("userName", name);
+editor.putString("userEmail", email);
+editor.apply();
+•	SharedPreferences:
+o	Key-value storage for saving small amounts of data locally.
+o	getSharedPreferences("UserPrefs", MODE_PRIVATE): Creates or retrieves a preferences file named UserPrefs.
+•	Editor:
+o	putString(key, value): Stores name and email in preferences.
+o	apply(): Commits changes asynchronously.
+________________________________________
+5.	Navigation to Welcome Activity:
+Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+startActivity(intent);
+finish(); // Finish this activity
+•	Intent: Starts WelcomeActivity.
+•	finish(): Closes the current activity to prevent users from going back to the registration screen using the back button.
+________________________________________
+3. Welcome Activity: Displaying User Data (WelcomeActivity.java)
+Code Explanation:
+1.	Initialization:
+private TextView textViewWelcome;
+•	Declare a TextView variable to display the welcome message.
+2.	Setting Up UI in onCreate:
+textViewWelcome = findViewById(R.id.textViewWelcome);
+•	Binds the TextView to its XML counterpart.
+________________________________________
+3.	Retrieve and Display Data:
+SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+String userName = sharedPreferences.getString("userName", "User");
+String userEmail = sharedPreferences.getString("userEmail", "No email");
+
+textViewWelcome.setText("Welcome, " + userName + "!\nYour email: " + userEmail);
+•	Retrieve Data:
+o	Reads stored name and email using getString(key, defaultValue).
+o	Default values are displayed if no data exists in preferences.
+•	Display Data:
+o	Concatenates and sets the welcome message on TextView.
+________________________________________
+4. Key Features
+•	SharedPreferences: Persists data locally on the device.
+•	Intents: Enables activity navigation.
+•	Validation: Ensures all input fields are filled.
+________________________________________
+Execution Flow
+1.	User enters name and email in the registration screen.
+2.	Clicks Register.
+o	Data is validated.
+o	Saved to local storage (SharedPreferences).
+o	Navigates to the welcome screen.
+3.	Welcome screen retrieves and displays stored data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 6:
+Create a Facebook page using RelativeLayout; set properties using .xml file
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<ImageView android:id="@+id/profilePicture"
+android:layout_width="100dp"
+android:layout_height="100dp"
+android:src="@drawable/f"
+android:layout_margin="16dp"
+android:contentDescription="TODO" />
+<Button
+android:id="@+id/loginButton"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_below="@+id/profilePicture"
+android:layout_margin="16dp"
+android:layout_marginEnd="16dp"
+android:layout_marginRight="16dp"
+android:text="Login" />
+</RelativeLayout>
+
+MainActivity.java
+package com.example.recordseventh;
+import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity
+{
+protected void onCreate(Bundle savedInstanceState)
+{
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+Button loginButton = findViewById(R.id.loginButton);
+loginButton.setOnClickListener(new View.OnClickListener() {
+public void onClick(View v)
+{
+openFacebook();
+}
+});
+}
+private void openFacebook() {
+String facebookUrl = "https://www.facebook.com"; // Or use the actual Facebook URL
+try {
+
+Intent intent = new Intent(Intent.ACTION_VIEW);
+intent.setData(Uri.parse("fb://facewebmodal/f?href=" + facebookUrl));
+startActivity(intent);
+}
+catch (Exception e)
+{
+Intent intent = new Intent(Intent.ACTION_VIEW);
+intent.setData(Uri.parse(facebookUrl)); startActivity(intent);
+}
+}
+}
+
+This program creates a simple layout in Android that mimics the functionality of a basic Facebook login interface using a RelativeLayout. It includes an image (acting as a profile picture or Facebook logo) and a login button. Clicking the login button attempts to open the Facebook app, or if the app is not installed, it opens the Facebook website in a browser.
+________________________________________
+Code Explanation
+1. Layout Design (activity_main.xml)
+The XML file defines the user interface using a RelativeLayout.
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+•	RelativeLayout:
+o	Enables positioning elements relative to one another or the parent container.
+________________________________________
+UI Components:
+1.	Profile Picture (ImageView)
+<ImageView 
+    android:id="@+id/profilePicture"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:src="@drawable/f"
+    android:layout_margin="16dp"
+    android:contentDescription="TODO" />
+•	ImageView:
+o	Displays an image (the Facebook logo in this case).
+•	android:src="@drawable/f":
+o	Specifies the image resource (assumes an image named f.png is stored in the res/drawable directory).
+•	android:layout_margin="16dp":
+o	Adds padding around the image for better spacing.
+•	contentDescription:
+o	Improves accessibility by providing a description for visually impaired users.
+________________________________________
+2.	Login Button
+<Button
+    android:id="@+id/loginButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/profilePicture"
+    android:layout_margin="16dp"
+    android:text="Login" />
+•	Button:
+o	Displays a clickable button with the text "Login."
+•	android:layout_below="@+id/profilePicture":
+o	Positions the button below the ImageView.
+________________________________________
+2. Main Activity Logic (MainActivity.java)
+The Java file contains the logic for handling user interaction.
+________________________________________
+Initialization:
+Button loginButton = findViewById(R.id.loginButton);
+•	Binds the Button in the layout (R.id.loginButton) to the loginButton variable in the activity.
+________________________________________
+Click Listener for Login Button:
+loginButton.setOnClickListener(new View.OnClickListener() {
+    public void onClick(View v) {
+        openFacebook();
+    }
+});
+•	setOnClickListener:
+o	Attaches an event listener to the button.
+•	When the button is clicked, the openFacebook method is called.
+________________________________________
+3. Opening Facebook (openFacebook Method)
+Logic to Open Facebook:
+String facebookUrl = "https://www.facebook.com";
+•	Stores the Facebook website URL in a string.
+________________________________________
+Attempt to Open Facebook App:
+Intent intent = new Intent(Intent.ACTION_VIEW);
+intent.setData(Uri.parse("fb://facewebmodal/f?href=" + facebookUrl));
+startActivity(intent);
+•	Intent:
+o	An object used to perform an action.
+o	Intent.ACTION_VIEW: Indicates the intent to view something (e.g., open a URL).
+•	fb://facewebmodal/f?href=" + facebookUrl:
+o	Tries to open the Facebook URL in the Facebook app (if installed).
+o	fb:// is a URI scheme specific to the Facebook app.
+________________________________________
+Fallback to Browser:
+catch (Exception e) {
+    Intent intent = new Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse(facebookUrl));
+    startActivity(intent);
+}
+•	If the Facebook app is not installed or an error occurs, it catches the exception and opens the Facebook website in a browser.
+________________________________________
+Execution Flow
+1.	The user sees a profile picture (Facebook logo) and a Login button.
+2.	When the Login button is clicked:
+o	First Attempt: Tries to open the Facebook app using a custom URI.
+o	Fallback: If the app is not installed, opens the Facebook website in a browser.
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 7:
+Develop an application that toggles image using FrameLayout
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<ImageView
+android:id="@+id/imageView"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:scaleType="centerCrop"
+android:src="@drawable/a" />
+</FrameLayout>
+
+MainActivity.java
+package com.example.record7;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+private ImageView imageView;
+private boolean isImage1 = true;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+imageView = findViewById(R.id.imageView);
+// Set an OnClickListener to toggle images
+imageView.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+toggleImage();
+}
+});
+}
+private void toggleImage() {
+if (isImage1) {
+imageView.setImageResource(R.drawable.b);
+
+} else {
+imageView.setImageResource(R.drawable.a);
+}
+isImage1 = !isImage1; // Toggle the boolean flag
+}
+}
+This program creates an Android application that toggles between two images when the user taps on an ImageView. The app uses a FrameLayout to manage the layout and an ImageView to display the images.
+________________________________________
+Code Explanation
+1. Layout Design (activity_main.xml)
+The XML file defines the user interface using a FrameLayout with a single ImageView to display an image.
+FrameLayout:
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+•	FrameLayout:
+o	A simple container that places its children on top of each other.
+o	Suitable for single elements or layered views.
+________________________________________
+ImageView:
+<ImageView
+    android:id="@+id/imageView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scaleType="centerCrop"
+    android:src="@drawable/a" />
+•	ImageView:
+o	Displays an image.
+•	android:src="@drawable/a":
+o	Sets the initial image (image resource a.png stored in the res/drawable folder).
+•	android:scaleType="centerCrop":
+o	Scales the image to fill the ImageView while preserving its aspect ratio.
+•	android:id="@+id/imageView":
+o	Assigns a unique ID to the ImageView, allowing it to be accessed in the Java code.
+________________________________________
+2. Main Activity Logic (MainActivity.java)
+The Java file handles the functionality for toggling the images.
+________________________________________
+Initialization:
+private ImageView imageView;
+private boolean isImage1 = true;
+•	imageView:
+o	A reference to the ImageView defined in the XML.
+•	isImage1:
+o	A boolean flag to track which image is currently displayed.
+o	Initially set to true (indicating the first image, a.png).
+________________________________________
+OnCreate Method:
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    imageView = findViewById(R.id.imageView);
+
+    // Set an OnClickListener to toggle images
+    imageView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            toggleImage();
+        }
+    });
+}
+1.	setContentView(R.layout.activity_main):
+o	Links the activity to the activity_main.xml layout file.
+2.	imageView = findViewById(R.id.imageView):
+o	Binds the ImageView defined in the XML (R.id.imageView) to the imageView variable in the Java code.
+3.	setOnClickListener:
+o	Attaches a click event listener to the ImageView.
+4.	Click Event Logic (toggleImage):
+o	When the ImageView is tapped, the toggleImage method is called.
+________________________________________
+Toggle Image Method:
+private void toggleImage() {
+    if (isImage1) {
+        imageView.setImageResource(R.drawable.b);
+    } else {
+        imageView.setImageResource(R.drawable.a);
+    }
+    isImage1 = !isImage1; // Toggle the boolean flag
+}
+1.	Check the Current Image (if (isImage1)):
+o	If isImage1 is true, it means the first image (a.png) is displayed.
+2.	Switch Images:
+o	If the first image is displayed (isImage1 == true), replace it with the second image (b.png) using:
+imageView.setImageResource(R.drawable.b);
+o	Otherwise, replace the second image with the first image (a.png):
+imageView.setImageResource(R.drawable.a);
+3.	Toggle the Boolean Flag:
+o	After switching the image, update isImage1 to its opposite value:
+isImage1 = !isImage1;
+o	Ensures the toggle functionality works alternately.
+________________________________________
+Execution Flow
+1.	The app starts, displaying the first image (a.png) in the ImageView.
+2.	When the user taps the image:
+o	The toggleImage method is triggered via the OnClickListener.
+o	The method checks the current image and switches it to the other.
+o	The boolean flag isImage1 is updated to track the change.
+3.	Each subsequent tap alternates the images between a.png and b.png.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 8:
+ Implement Adapters and perform exception handling
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="16dp"
+tools:context=".MainActivity">
+<GridView
+android:id="@+id/gridView"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:numColumns="2"
+/>
+</RelativeLayout>
+
+MainActivity.java
+package com.example.adapter;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.Toast;
+import java.util.ArrayList;
+
+import java.util.List;
+public class MainActivity extends AppCompatActivity {
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+GridView gridView = findViewById(R.id.gridView);
+final List<String> data = fetchData();
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+android.R.layout.simple_list_item_1, data);
+gridView.setAdapter(adapter);
+gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+try {
+String item = data.get(position);
+Toast.makeText(MainActivity.this, "Clicked: " + item,
+Toast.LENGTH_SHORT).show();
+} catch (IndexOutOfBoundsException e) {
+e.printStackTrace();
+Toast.makeText(MainActivity.this, "Item not found", Toast.LENGTH_SHORT).show();
+}
+}
+});
+}
+private List<String> fetchData() {
+List<String> data = new ArrayList<>();
+data.add("Item 1");
+data.add("Item 2");
+data.add("Item 3");
+
+data.add("Item 4");
+return data;
+}
+}
+This program demonstrates the use of adapters in Android to populate a GridView with a list of data. It also includes exception handling to gracefully handle errors such as accessing invalid list indices.
+________________________________________
+Code Explanation
+________________________________________
+1. Layout Design (activity_main.xml)
+This file defines the user interface, including a GridView for displaying the data.
+RelativeLayout:
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+•	RelativeLayout:
+o	A flexible layout where child views can be positioned relative to each other or the parent container.
+________________________________________
+GridView:
+<GridView
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:numColumns="2" />
+•	GridView:
+o	A view that displays items in a grid format.
+•	Attributes:
+o	android:id="@+id/gridView": Assigns a unique ID for referencing the GridView in the Java code.
+o	android:numColumns="2": Specifies that the grid will have two columns.
+________________________________________
+2. Main Activity Logic (MainActivity.java)
+The Java file handles the logic for populating the GridView and handling click events with exception handling.
+________________________________________
+onCreate Method:
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    
+    GridView gridView = findViewById(R.id.gridView);
+•	setContentView(R.layout.activity_main):
+o	Links the activity to the activity_main.xml layout.
+•	findViewById(R.id.gridView):
+o	Retrieves the GridView from the XML layout for use in Java.
+________________________________________
+Fetching Data (fetchData)
+private List<String> fetchData() {
+    List<String> data = new ArrayList<>();
+    data.add("Item 1");
+    data.add("Item 2");
+    data.add("Item 3");
+    data.add("Item 4");
+    return data;
+}
+•	Creates a list of string items to display in the GridView.
+________________________________________
+Adapter Setup
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+    android.R.layout.simple_list_item_1, data);
+gridView.setAdapter(adapter);
+•	ArrayAdapter:
+o	Converts the List<String> (data) into a format the GridView can display.
+o	Uses a predefined layout (android.R.layout.simple_list_item_1) to style each grid item.
+•	gridView.setAdapter(adapter):
+o	Attaches the adapter to the GridView.
+________________________________________
+Handling Item Clicks
+java
+Copy code
+gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        try {
+            String item = data.get(position);
+            Toast.makeText(MainActivity.this, "Clicked: " + item, Toast.LENGTH_SHORT).show();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            Toast.makeText(MainActivity.this, "Item not found", Toast.LENGTH_SHORT).show();
+        }
+    }
+});
+•	setOnItemClickListener:
+o	Sets a click listener for the GridView items.
+•	try-catch Block:
+o	Handles potential IndexOutOfBoundsException if the position is invalid.
+o	If an exception occurs:
+	e.printStackTrace(): Logs the error for debugging.
+	Toast: Displays a message ("Item not found") to the user.
+________________________________________
+Execution Flow
+1.	App Launch:
+o	The GridView is populated with the data ("Item 1", "Item 2", etc.).
+2.	User Interaction:
+o	When a grid item is tapped:
+	The onItemClick method is triggered.
+	The tapped item's name is retrieved using data.get(position).
+	A Toast message is shown, e.g., "Clicked: Item 1".
+3.	Error Handling:
+o	If an invalid position is accessed (e.g., data.get(-1) or data.get(5)):
+	An IndexOutOfBoundsException occurs.
+	The catch block handles the exception, logs it, and shows a "Item not found" message.
+
+
+
+
+
+
+
+
+PROGRAM 9:
+Implement Intent to navigate between multiple activities
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/page1" android:layout_width="wrap_content"
+android:layout_height="wrap_content" android:text="This Is the First Page"
+app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintLeft_toLeftOf="parent"
+app:layout_constraintRight_toRightOf="parent" app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+activity_main2.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity2">
+<Button
+android:id="@+id/page2" android:layout_width="wrap_content"
+android:layout_height="wrap_content" android:text="This Is the Second Page"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+package com.example.record9;
+import androidx.appcompat.app.AppCompatActivity; import android.os.Bundle;
+
+import android.content.Intent; import android.view.View; import android.widget.Button;
+public class MainActivity extends AppCompatActivity { Button b1 ;
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b1 = findViewById(R.id.page1); b1.setOnClickListener(
+new View.OnClickListener() { public void onClick(View v) {
+Intent i = new Intent(MainActivity.this,MainActivity2.class); startActivity(i); }
+}
+); }
+}
+
+MainActivity2.java
+package com.example.record9;
+import android.app.Activity; import android.content.Intent; import android.os.Bundle; import
+android.view.View; import android.widget.Button;
+public class MainActivity2 extends Activity { Button b2 ;
+protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main2);
+b2 = findViewById(R.id.page2); b2.setOnClickListener(
+new View.OnClickListener() { @Override
+public void onClick(View v) {
+Intent i = new Intent(MainActivity2.this,MainActivity.class); startActivity(i);
+}
+}
+);
+
+}
+}
+This program demonstrates intents in Android to navigate between two activities. An intent is a messaging object used to request an action from another component, such as launching another activity.
+________________________________________
+Code Explanation
+________________________________________
+XML Layout Files
+________________________________________
+activity_main.xml
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <Button
+        android:id="@+id/page1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Is the First Page"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+•	ConstraintLayout:
+o	Used to position views relative to one another or the parent container.
+•	Button:
+o	Displays "This Is the First Page."
+o	Positioned in the center using constraints.
+________________________________________
+activity_main2.xml
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+    <Button
+        android:id="@+id/page2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This Is the Second Page"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+•	Similar to activity_main.xml but for the second activity.
+•	The button displays "This Is the Second Page."
+________________________________________
+Java Files
+________________________________________
+MainActivity.java
+package com.example.record9;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    Button b1;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        b1 = findViewById(R.id.page1);
+        b1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MainActivity2.class);
+                startActivity(i);
+            }
+        });
+    }
+}
+•	Imports:
+o	Necessary for Android activity and view-related operations (Intent, Button, etc.).
+•	setContentView:
+o	Associates activity_main.xml as the layout for this activity.
+•	findViewById:
+o	Finds the button in the layout using its ID (page1).
+•	setOnClickListener:
+o	Sets up a click listener for the button.
+•	Intent:
+o	Defines the action to switch from MainActivity to MainActivity2.
+o	Intent(MainActivity.this, MainActivity2.class):
+	Specifies the source (MainActivity) and destination (MainActivity2) activities.
+o	startActivity(i):
+	Executes the intent to launch MainActivity2.
+________________________________________
+MainActivity2.java
+package com.example.record9;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity2 extends Activity {
+    Button b2;
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+
+        b2 = findViewById(R.id.page2);
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+}
+•	Similar Structure:
+o	The structure is the same as MainActivity.
+o	The button (page2) navigates back to MainActivity.
+•	Switch Intent:
+o	Intent(MainActivity2.this, MainActivity.class):
+	Launches the first activity (MainActivity) when the button is clicked.
+________________________________________
+Execution Flow
+1.	App Launch:
+o	MainActivity is displayed, showing a button labeled "This Is the First Page."
+2.	First Button Click:
+o	Clicking the button triggers the OnClickListener.
+o	An Intent starts MainActivity2.
+o	The screen switches to MainActivity2, showing "This Is the Second Page."
+3.	Second Button Click:
+o	Clicking the second button triggers its OnClickListener.
+o	An Intent starts MainActivity.
+o	The screen switches back to MainActivity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 10:
+Develop an application that uses ArrayAdapter with ListView
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_height="match_parent"
+android:layout_width="match_parent">
+<ListView
+android:id="@+id/list"
+android:layout_width="match_parent"
+android:layout_height="match_parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java:
+package com.example.arrayadapter;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle; import android.view.View;
+import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter; import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+ListView l;
+String tutorials[]
+= { "Algorithms", "Data Structures",
+"Languages","dbms","java","python"};
+protected void onCreate(Bundle savedInstanceState) {
+
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_mai
+n); l = findViewById(R.id.list);
+final ArrayAdapter<String> arr;
+arr = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tutorials);
+l.setAdapter(arr);
+l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+String value = arr.getItem(position);
+Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+} }); }}
+This program demonstrates the use of an ArrayAdapter with a ListView to display a list of items and handle item selection in an Android application. Let's break the code into its components for detailed understanding.
+________________________________________
+Code Explanation
+________________________________________
+XML Layout File: activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+•	ConstraintLayout:
+o	The root layout of the activity. It positions and organizes the child views.
+•	ListView:
+o	A view that displays a scrollable list of items.
+o	android:id="@+id/list": Assigns an ID to the ListView so it can be referenced in the Java code.
+o	android:layout_width="match_parent" and android:layout_height="match_parent":
+	Ensures the ListView occupies the entire screen.
+________________________________________
+
+
+Java Code: MainActivity.java
+________________________________________
+Imports
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+•	Necessary imports for working with Android's UI components:
+o	ListView: To display a list of items.
+o	ArrayAdapter: To bind the list data to the ListView.
+o	AdapterView: To handle item selection events.
+o	Toast: To display a short message to the user.
+________________________________________
+MainActivity Class
+public class MainActivity extends AppCompatActivity {
+•	Defines the main activity, inheriting from AppCompatActivity.
+________________________________________
+Member Variables
+java
+Copy code
+ListView l;
+String tutorials[] = { "Algorithms", "Data Structures", "Languages", "dbms", "java", "python"};
+•	ListView l:
+o	A reference to the ListView defined in activity_main.xml.
+•	String tutorials[]:
+o	A string array containing the list of items to display in the ListView.
+________________________________________
+onCreate Method
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+•	onCreate:
+o	Called when the activity is created.
+o	Sets up the UI and initializes components.
+•	setContentView:
+o	Associates the XML layout (activity_main.xml) with the activity.
+________________________________________
+Find the ListView
+l = findViewById(R.id.list);
+•	Fetches the ListView using its ID (list) and assigns it to the variable l.
+________________________________________
+Create and Set ArrayAdapter
+final ArrayAdapter<String> arr;
+arr = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tutorials);
+l.setAdapter(arr);
+•	ArrayAdapter:
+o	Binds the tutorials string array to the ListView.
+o	Constructor Parameters:
+	this: Refers to the current activity context.
+	android.R.layout.simple_list_item_1:
+	A predefined layout for a simple single-line list item.
+	tutorials: The array of strings to display.
+•	setAdapter:
+o	Attaches the adapter to the ListView to populate its items.
+________________________________________
+Handle Item Click Events
+l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+        String value = arr.getItem(position);
+        Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+    }
+});
+•	setOnItemClickListener:
+o	Attaches a click listener to the ListView items.
+•	Parameters of onItemClick:
+o	adapterView: The ListView that was clicked.
+o	view: The specific item view that was clicked.
+o	position: The index of the clicked item in the array.
+o	id: The row ID of the clicked item.
+•	arr.getItem(position):
+o	Retrieves the clicked item’s value from the ArrayAdapter using its position.
+•	Toast.makeText:
+o	Displays a short message showing the clicked item's value.
+________________________________________
+Execution Flow
+1.	App Launch:
+o	The onCreate method is called.
+o	The tutorials array is bound to the ListView using an ArrayAdapter.
+o	The ListView displays the items: "Algorithms", "Data Structures", "Languages", "dbms", "java", "python".
+2.	Item Click:
+o	Clicking an item triggers the onItemClick method.
+o	The clicked item's value is fetched using arr.getItem(position).
+o	A Toast message displays the value of the clicked item (e.g., "Algorithms").
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PROGRAM 11:
+Develop an application that implements Spinner component and perform event handling
+CODE:
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+<Spinner
+android:id="@+id/my_spinner"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:minHeight="48dp" />
+<TextView
+android:id="@+id/selected_item"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:paddingTop="16dp" />
+</LinearLayout>
+
+MainActivity.java
+package com.example.record11;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends AppCompatActivity {
+private Spinner mySpinner;
+private TextView selectedItemTextView;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+mySpinner = findViewById(R.id.my_spinner);
+selectedItemTextView = findViewById(R.id.selected_item);
+// Create an ArrayAdapter using a string array and a default spinner layout
+ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+
+R.array.spinner_items, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+mySpinner.setAdapter(adapter);
+// Set an item selected listener on the Spinner
+mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+@Override
+public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+String selectedItem = parent.getItemAtPosition(position).toString();
+selectedItemTextView.setText("Selected: " + selectedItem);
+}
+@Override
+public void onNothingSelected(AdapterView<?> parent) {
+selectedItemTextView.setText("Nothing selected");
+}
+});
+}
+}
+
+strings.xml
+<resources>
+<string name="app_name">Spinner Example</string>
+<string-array name="spinner_items">
+<item>Item 1</item>
+<item>Item 2</item>
+<item>Item 3</item>
+<item>Item 4</item>
+</string-array>
+</resources>
+This program demonstrates how to use a Spinner component in an Android application to create a dropdown menu and handle item selection events. Below is a detailed explanation of the code.
+________________________________________
+Code Explanation
+________________________________________
+XML Layout File: activity_main.xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    
+    <Spinner
+        android:id="@+id/my_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp" />
+        
+    <TextView
+        android:id="@+id/selected_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp" />
+</LinearLayout>
+1.	LinearLayout:
+o	Arranges its child views in a vertical orientation.
+o	The padding attribute provides spacing inside the layout.
+2.	Spinner:
+o	A dropdown menu that allows users to select one item from a list.
+o	android:id="@+id/my_spinner": Assigns an ID to the Spinner for reference in the Java code.
+o	android:layout_width="match_parent" and android:layout_height="wrap_content":
+	Makes the Spinner as wide as its parent but only as tall as needed.
+3.	TextView:
+o	Displays the selected item from the Spinner.
+o	android:id="@+id/selected_item": Assigns an ID to the TextView for reference in Java code.
+________________________________________
+Java Code: MainActivity.java
+________________________________________
+Imports
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+•	AdapterView:
+o	Provides interfaces for handling item click or selection events for views like Spinners.
+•	ArrayAdapter:
+o	Binds the data source (e.g., an array) to a UI component (e.g., Spinner).
+________________________________________
+MainActivity Class
+public class MainActivity extends AppCompatActivity {
+    private Spinner mySpinner;
+    private TextView selectedItemTextView;
+•	Declares references for the Spinner and TextView.
+________________________________________
+onCreate Method
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+•	onCreate:
+o	Called when the activity is created.
+o	Initializes the UI components and sets up event handling.
+________________________________________
+Initialize Spinner and TextView
+mySpinner = findViewById(R.id.my_spinner);
+selectedItemTextView = findViewById(R.id.selected_item);
+•	Fetches the Spinner and TextView using their IDs defined in the XML layout.
+________________________________________
+Set Up ArrayAdapter
+ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+    R.array.spinner_items, android.R.layout.simple_spinner_item);
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+mySpinner.setAdapter(adapter);
+•	ArrayAdapter.createFromResource:
+o	Creates an adapter using:
+	Context (this): Refers to the current activity.
+	R.array.spinner_items: A string array resource defined in strings.xml.
+	android.R.layout.simple_spinner_item: A predefined layout for Spinner items.
+•	setDropDownViewResource:
+o	Sets the layout for the dropdown list that appears when the Spinner is clicked.
+o	Uses the predefined layout android.R.layout.simple_spinner_dropdown_item.
+•	setAdapter:
+o	Attaches the adapter to the Spinner, which binds the data to the dropdown menu.
+________________________________________
+Handle Spinner Selection Events
+mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedItem = parent.getItemAtPosition(position).toString();
+        selectedItemTextView.setText("Selected: " + selectedItem);
+    }
+    
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        selectedItemTextView.setText("Nothing selected");
+    }
+});
+•	setOnItemSelectedListener:
+o	Sets a listener to handle item selection events.
+•	onItemSelected:
+o	Called when an item is selected in the Spinner.
+o	Parameters:
+	parent: The AdapterView (Spinner) that triggered the event.
+	view: The selected item's view.
+	position: The index of the selected item.
+	id: The row ID of the selected item.
+o	Action:
+	Retrieves the selected item using parent.getItemAtPosition(position).
+	Updates the TextView to display the selected item.
+•	onNothingSelected:
+o	Called when no item is selected in the Spinner.
+o	Updates the TextView with a default message.
+________________________________________
+String Resources: strings.xml
+<resources>
+    <string name="app_name">Spinner Example</string>
+    <string-array name="spinner_items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+    </string-array>
+</resources>
+1.	string:
+o	Defines the app name as "Spinner Example".
+2.	string-array:
+o	A string array resource named spinner_items that contains:
+	Item 1, Item 2, Item 3, and Item 4.
+________________________________________
+Execution Flow
+1.	App Launch:
+o	The onCreate method initializes the Spinner and binds the string array (spinner_items) to it using an ArrayAdapter.
+o	The Spinner displays Item 1, Item 2, Item 3, and Item 4 in the dropdown menu.
+2.	Item Selection:
+o	When an item is selected, the onItemSelected method is called.
+o	The selected item's value is displayed in the TextView.
+3.	No Item Selected:
+o	If no item is selected, the onNothingSelected method sets the TextView to "Nothing selected".
+
+
+
+
+
+
+PROGRAM 12
+Create database using SQLite and perform INSERT and SELECT
+CODE:
+activity_main.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+<EditText
+android:id="@+id/editTextName"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Name" />
+<EditText
+android:id="@+id/editTextAge"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Age"
+
+android:inputType="number" />
+<EditText
+android:id="@+id/editTextMark"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:hint="Mark"
+android:inputType="number" />
+<Button
+android:id="@+id/buttonInsert"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Insert Data" />
+<Button
+android:id="@+id/buttonSelect"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="select Data" />
+<TextView
+android:id="@+id/textViewData"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="16dp"
+android:text="User Data:"
+android:textStyle="bold" />
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>
+
+MainActivity.java:
+package com.example.sjcet.c5q1;
+import android.support.v7.app.AppCompatActivity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+private DatabaseHelper db; // database name
+private EditText editTextName, editTextAge, editTextMark;
+private TextView textViewData;
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+db = new DatabaseHelper(this);
+editTextName = findViewById(R.id.editTextName);
+editTextAge = findViewById(R.id.editTextAge);
+editTextMark = findViewById(R.id.editTextMark);
+textViewData = findViewById(R.id.textViewData);
+Button buttonInsert = findViewById(R.id.buttonInsert);
+Button buttonSelect = findViewById(R.id.buttonSelect);
+buttonInsert.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+
+String name = editTextName.getText().toString();
+int age = Integer.parseInt(editTextAge.getText().toString());
+int mark = Integer.parseInt(editTextMark.getText().toString());
+boolean insertData = db.insertUser(name, age, mark); // insert data
+if (insertData) {
+Toast.makeText(MainActivity.this, "User Inserted Successfully",
+Toast.LENGTH_SHORT).show();
+displayData();
+} else {
+Toast.makeText(MainActivity.this, "Failed to Insert User",
+Toast.LENGTH_SHORT).show();
+}
+}
+});
+buttonSelect.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+displayData();
+}
+});
+}
+//display data
+private void displayData() {
+Cursor cursor = db.getAllUsers();
+if (cursor.getCount() == 0) {
+textViewData.setText("No users found");
+} else {
+StringBuilder data = new StringBuilder();
+
+while (cursor.moveToNext()) {
+int id = cursor.getInt(0);
+String name = cursor.getString(1);
+int age = cursor.getInt(2);
+int mark = cursor.getInt(3);
+data.append("ID: ").append(id)
+.append(", Name: ").append(name)
+.append(", Age: ").append(age)
+.append(", Mark: ").append(mark)
+.append("\n");
+}
+textViewData.setText(data.toString());
+}
+}
+}
+
+DatabaseHelper.java
+package com.example.sjcet.c5q1;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+public class DatabaseHelper extends SQLiteOpenHelper{
+private static final String DATABASE_NAME = "UserDatabase.db";
+private static final String TABLE_NAME = "UserTable";
+private static final String COL_1 = "ID";
+private static final String COL_2 = "NAME";
+
+private static final String COL_3 = "AGE";
+private static final String COL_4 = "MARK";
+public DatabaseHelper(Context context) {
+super(context, DATABASE_NAME, null, 1);
+}
+@Override
+public void onCreate(SQLiteDatabase db) {
+db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
+COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+COL_2 + " TEXT," +
+COL_3 + " INTEGER," +
+COL_4 + " INTEGER)");
+}
+@Override
+public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+onCreate(db);
+}
+public boolean insertUser(String name, int age, int mark) {
+SQLiteDatabase db = this.getWritableDatabase();
+ContentValues contentValues = new ContentValues();
+contentValues.put(COL_2, name);
+contentValues.put(COL_3, age);
+contentValues.put(COL_4, mark);
+long result = db.insert(TABLE_NAME, null, contentValues);
+return result != -1;
+}
+
+public Cursor getAllUsers() {
+SQLiteDatabase db = this.getWritableDatabase();
+return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+}
+}
+This program demonstrates how to use SQLite in an Android application for performing INSERT and SELECT operations on a database. It includes creating a user interface to accept data, saving the data in a SQLite database, and displaying the stored data. Below is the detailed explanation:
+________________________________________
+Code Explanation
+XML Layout: activity_main.xml
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Input fields for user data -->
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name" />
+
+        <EditText
+            android:id="@+id/editTextAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editTextMark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mark"
+            android:inputType="number" />
+
+        <!-- Buttons for Insert and Select -->
+        <Button
+            android:id="@+id/buttonInsert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insert Data" />
+
+        <Button
+            android:id="@+id/buttonSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Data" />
+
+        <!-- Display area for data -->
+        <TextView
+            android:id="@+id/textViewData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="User Data:"
+            android:textStyle="bold" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
+1.	Layout Structure:
+o	Uses a LinearLayout inside a ConstraintLayout for vertical alignment of elements.
+2.	Components:
+o	EditText: Input fields for Name, Age, and Mark.
+o	Button: Two buttons for inserting and selecting data.
+o	TextView: Displays the retrieved data.
+________________________________________
+Main Activity: MainActivity.java
+________________________________________
+Imports
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+•	Includes necessary imports for database operations (Cursor) and UI elements (EditText, Button, TextView).
+________________________________________
+Class Definition and Member Variables
+public class MainActivity extends AppCompatActivity {
+    private DatabaseHelper db;
+    private EditText editTextName, editTextAge, editTextMark;
+    private TextView textViewData;
+•	DatabaseHelper: Handles database operations like creating tables, inserting data, and retrieving data.
+•	UI References: Holds references to EditText for inputs and TextView for displaying data.
+________________________________________
+onCreate Method
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    db = new DatabaseHelper(this);
+    
+    // Initialize UI components
+    editTextName = findViewById(R.id.editTextName);
+    editTextAge = findViewById(R.id.editTextAge);
+    editTextMark = findViewById(R.id.editTextMark);
+    textViewData = findViewById(R.id.textViewData);
+    
+    Button buttonInsert = findViewById(R.id.buttonInsert);
+    Button buttonSelect = findViewById(R.id.buttonSelect);
+
+    // Set up button actions
+    buttonInsert.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String name = editTextName.getText().toString();
+            int age = Integer.parseInt(editTextAge.getText().toString());
+            int mark = Integer.parseInt(editTextMark.getText().toString());
+
+            boolean insertData = db.insertUser(name, age, mark);
+            if (insertData) {
+                Toast.makeText(MainActivity.this, "User Inserted Successfully",
+                    Toast.LENGTH_SHORT).show();
+                displayData();
+            } else {
+                Toast.makeText(MainActivity.this, "Failed to Insert User",
+                    Toast.LENGTH_SHORT).show();
+            }
+        }
+    });
+
+    buttonSelect.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            displayData();
+        }
+    });
+}
+1.	Database Initialization:
+o	Creates an instance of DatabaseHelper for performing database operations.
+2.	Button Click Handlers:
+o	Insert Button:
+	Retrieves user input and converts numeric fields to integers.
+	Calls the insertUser method from DatabaseHelper to insert the data into the database.
+	Displays a toast message for success or failure.
+	Calls displayData to update the data displayed on the screen.
+o	Select Button:
+	Directly calls displayData to fetch and show all stored records.
+________________________________________
+Display Data
+private void displayData() {
+    Cursor cursor = db.getAllUsers();
+    if (cursor.getCount() == 0) {
+        textViewData.setText("No users found");
+    } else {
+        StringBuilder data = new StringBuilder();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            int age = cursor.getInt(2);
+            int mark = cursor.getInt(3);
+            data.append("ID: ").append(id)
+                .append(", Name: ").append(name)
+                .append(", Age: ").append(age)
+                .append(", Mark: ").append(mark)
+                .append("\n");
+        }
+        textViewData.setText(data.toString());
+    }
+}
+1.	getAllUsers:
+o	Retrieves all records from the database.
+2.	Data Handling:
+o	If no records exist, shows "No users found".
+o	Otherwise, iterates through the records and appends each user's details to a StringBuilder.
+________________________________________
+Database Helper: DatabaseHelper.java
+________________________________________
+Class Definition
+public class DatabaseHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "UserDatabase.db";
+    private static final String TABLE_NAME = "UserTable";
+    private static final String COL_1 = "ID";
+    private static final String COL_2 = "NAME";
+    private static final String COL_3 = "AGE";
+    private static final String COL_4 = "MARK";
+•	Defines constants for the database name, table name, and column names.
+________________________________________
+onCreate Method
+@Override
+public void onCreate(SQLiteDatabase db) {
+    db.execSQL("CREATE TABLE " + TABLE_NAME + " (" +
+        COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+        COL_2 + " TEXT," +
+        COL_3 + " INTEGER," +
+        COL_4 + " INTEGER)");
+}
+•	Creates a table named UserTable with the columns:
+o	ID: Auto-incrementing primary key.
+o	NAME, AGE, MARK: User details.
+________________________________________
+Insert Method
+public boolean insertUser(String name, int age, int mark) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(COL_2, name);
+    contentValues.put(COL_3, age);
+    contentValues.put(COL_4, mark);
+    long result = db.insert(TABLE_NAME, null, contentValues);
+    return result != -1;
+}
+•	Inserts user data into the table using ContentValues.
+•	Returns true if successful, false otherwise.
+________________________________________
+Select Method
+public Cursor getAllUsers() {
+    SQLiteDatabase db = this.getWritableDatabase();
+    return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+}
+•	Executes a SQL query to retrieve all records from UserTable.
+________________________________________
+Execution Flow
+1.	User enters Name, Age, and Mark and clicks Insert Data.
+2.	Data is saved in the database using insertUser.
+3.	Clicking Select Data retrieves all records using getAllUsers and displays them in the TextView.
+
